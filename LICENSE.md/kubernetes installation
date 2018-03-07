@@ -1,0 +1,62 @@
+1. sudo apt install curl
+
+2. apt-get install -y docker.io
+
+3. apt-get update 
+
+4. apt-get install -y apt-transport-https
+
+5. as root run:
+	curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+6. cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+7. apt-get update
+
+8. apt-get install -y kubelet kubeadm kubectl
+
+9. kubeadm init
+
+10. save the output of the key:
+kubeadm join --token ca6d44.0f6070c8d512ead4 172.16.244.139:6443 --discovery-token-ca-cert-hash sha256:1515c151db314f7d9ff69a0537deb24148fa67d9ec10717608abf7f41855c256
+
+
+11.
+	mkdir -p $HOME/.kube
+	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+	sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ 
+12. on .bashrc :
+	export KUBECONFIG=/etc/kubernetes/admin.conf
+	
+13.kubectl apply -f https://git.io/weave-kube
+ 
+ 
+In The Slave: 
+1. sudo apt install curl
+
+2. apt-get install -y docker.io
+
+3. apt-get update 
+
+4. apt-get install -y apt-transport-https
+
+5. as root run:
+	curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+6. cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+7. apt-get update
+
+8. apt-get install -y kubelet kubeadm kubectl
+
+9. in .bashrc
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+10. kubeadm join --token ca6d44.0f6070c8d512ead4 172.16.244.139:6443 --discovery-token-ca-cert-hash sha256:1515c151db314f7d9ff69a0537deb24148fa67d9ec10717608abf7f41855c25
+
+
